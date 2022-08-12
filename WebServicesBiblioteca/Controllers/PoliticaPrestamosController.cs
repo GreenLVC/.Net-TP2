@@ -8,17 +8,17 @@ namespace WebServicesBiblioteca.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SociosController : ControllerBase
+    public class PoliticaPrestamosController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PoliticaPrestamoRespuesta oRespuesta = new PoliticaPrestamoRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    var lst = db.Socios.ToList();
+                    var lst = db.PoliticaPrestamos.ToList();
                     oRespuesta.Exito = 1;
                     oRespuesta.Data = lst;
                 }
@@ -31,21 +31,16 @@ namespace WebServicesBiblioteca.Controllers
             return Ok(oRespuesta);
         }
         [HttpPost]
-        public IActionResult Add(SocioRequest model)
+        public IActionResult Add(PoliticaPrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = new Socio();
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Socios.Add(oSocio);
+                    PoliticaPrestamo oPoliticaPrestamo = new PoliticaPrestamo();
+                    oPoliticaPrestamo.CantMaxLibrosPend = model.CantMaxLibrosPend;
+                    db.PoliticaPrestamos.Add(oPoliticaPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -59,21 +54,16 @@ namespace WebServicesBiblioteca.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(SocioRequest model)
+        public IActionResult Edit(PoliticaPrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(model.Id);
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Entry(oSocio).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    PoliticaPrestamo oPoliticaPrestamo = db.PoliticaPrestamos.Find(model.FechaVigencia);
+                    oPoliticaPrestamo.CantMaxLibrosPend = model.CantMaxLibrosPend;
+                    db.Entry(oPoliticaPrestamo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -93,8 +83,8 @@ namespace WebServicesBiblioteca.Controllers
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(Id);
-                    db.Remove(oSocio);
+                    PoliticaPrestamo oPoliticaPrestamo = db.PoliticaPrestamos.Find(Id);
+                    db.Remove(oPoliticaPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }

@@ -8,17 +8,17 @@ namespace WebServicesBiblioteca.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SociosController : ControllerBase
+    public class LineasPrestamosController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            LineasPrestamosRespuesta oRespuesta = new LineasPrestamosRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    var lst = db.Socios.ToList();
+                    var lst = db.LineasPrestamos.ToList();
                     oRespuesta.Exito = 1;
                     oRespuesta.Data = lst;
                 }
@@ -31,21 +31,19 @@ namespace WebServicesBiblioteca.Controllers
             return Ok(oRespuesta);
         }
         [HttpPost]
-        public IActionResult Add(SocioRequest model)
+        public IActionResult Add(LineaPrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = new Socio();
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Socios.Add(oSocio);
+                    LineasPrestamo oLineasPrestamo = new LineasPrestamo();
+                    oLineasPrestamo.FechaDevolucion = model.FechaDevolucion;
+                    oLineasPrestamo.Devuelto = model.Devuelto;
+                    oLineasPrestamo.IdEjemplar = model.IdEjemplar;
+                    oLineasPrestamo.IdPrestamo = model.IdPrestamo;
+                    db.LineasPrestamos.Add(oLineasPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -59,21 +57,19 @@ namespace WebServicesBiblioteca.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(SocioRequest model)
+        public IActionResult Edit(LineaPrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(model.Id);
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Entry(oSocio).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    LineasPrestamo oLineasPrestamo = db.LineasPrestamos.Find(model.IdLineaPrestamo);
+                    oLineasPrestamo.FechaDevolucion = model.FechaDevolucion;
+                    oLineasPrestamo.Devuelto = model.Devuelto;
+                    oLineasPrestamo.IdEjemplar = model.IdEjemplar;
+                    oLineasPrestamo.IdPrestamo = model.IdPrestamo;
+                    db.Entry(oLineasPrestamo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -93,8 +89,8 @@ namespace WebServicesBiblioteca.Controllers
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(Id);
-                    db.Remove(oSocio);
+                    LineasPrestamo oLineasPrestamo = db.LineasPrestamos.Find(Id);
+                    db.Remove(oLineasPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }

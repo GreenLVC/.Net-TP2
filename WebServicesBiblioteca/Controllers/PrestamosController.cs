@@ -8,17 +8,17 @@ namespace WebServicesBiblioteca.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SociosController : ControllerBase
+    public class PrestamosController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PrestamosRespuesta oRespuesta = new PrestamosRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    var lst = db.Socios.ToList();
+                    var lst = db.Prestamos.ToList();
                     oRespuesta.Exito = 1;
                     oRespuesta.Data = lst;
                 }
@@ -31,21 +31,17 @@ namespace WebServicesBiblioteca.Controllers
             return Ok(oRespuesta);
         }
         [HttpPost]
-        public IActionResult Add(SocioRequest model)
+        public IActionResult Add(PrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = new Socio();
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Socios.Add(oSocio);
+                    Prestamo oPrestamo = new Prestamo();
+                    oPrestamo.FechaPrestamo = model.FechaPrestamo;
+                    oPrestamo.IdSocio = model.IdSocio;
+                    db.Prestamos.Add(oPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -59,21 +55,20 @@ namespace WebServicesBiblioteca.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(SocioRequest model)
+        public IActionResult Edit(PrestamoRequest model)
         {
             SocioRespuesta oRespuesta = new SocioRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(model.Id);
-                    oSocio.Apellido = model.Apellido;
-                    oSocio.Nombre = model.Nombre;
-                    oSocio.Email = model.Email;
-                    oSocio.Telefono = model.Telefono;
-                    oSocio.Domicilio = model.Domicilio;
-                    oSocio.Habilitado = model.Habilitado;
-                    db.Entry(oSocio).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    Prestamo oPrestamo = db.Prestamos.Find(model.IdPrestamo);
+                    oPrestamo.FechaPrestamo = model.FechaPrestamo;
+                    oPrestamo.IdSocio = model.IdSocio;
+                    db.Prestamos.Add(oPrestamo);
+                    db.SaveChanges();
+                    oRespuesta.Exito = 1;
+                    db.Entry(oPrestamo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }
@@ -93,8 +88,8 @@ namespace WebServicesBiblioteca.Controllers
             {
                 using (bibliotecaContext db = new bibliotecaContext())
                 {
-                    Socio oSocio = db.Socios.Find(Id);
-                    db.Remove(oSocio);
+                    Prestamo oPrestamo = db.Prestamos.Find(Id);
+                    db.Remove(oPrestamo);
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
                 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RWw5kS04zaZkpXjFGw5sZs52B/MViwrrdAKqkfIV4qmrcCxG9YAfZhCP12mBoyK2+lCNNwRWZ4IDvs633/nPAg==",
+  "dgSpecHash": "TRkElbKvWhn5hVGA5d/2IIVOm2JogKsdW5qOESR5qaahUS3VwZ7c5s+TBnDgvvwQxhSCpAySHfSbWtvZn7kVgg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\valen\\OneDrive - frro.utn.edu.ar\\Documentos\\Facu\\4to\\.Net\\Tp2\\WebServicesBiblioteca\\WebServicesBiblioteca\\WebServicesBiblioteca.csproj",
+  "projectFilePath": "C:\\Users\\valen\\OneDrive - frro.utn.edu.ar\\Documentos\\Facu\\4to\\.Net\\Tp2\\.Net-TP2\\WebServicesBiblioteca\\WebServicesBiblioteca.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\valen\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
