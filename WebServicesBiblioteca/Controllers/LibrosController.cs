@@ -33,7 +33,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPost]
         public IActionResult Add(LibroRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            LibroRespuesta oRespuesta = new LibroRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -60,7 +60,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPut]
         public IActionResult Edit(LibroRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            LibroRespuesta oRespuesta = new LibroRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -86,7 +86,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpDelete("{Id}")]
         public IActionResult Delete(int Id)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            LibroRespuesta oRespuesta = new LibroRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())

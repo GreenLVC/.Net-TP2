@@ -33,7 +33,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPost]
         public IActionResult Add(PoliticaPrestamoRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PoliticaPrestamoRespuesta oRespuesta = new PoliticaPrestamoRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -45,10 +45,11 @@ namespace WebServicesBiblioteca.Controllers
                     oRespuesta.Exito = 1;
                 }
             }
+
             catch (Exception ex)
             {
                 oRespuesta.Mensaje = ex.Message;
-            }
+            } 
 
             return Ok(oRespuesta);
         }
@@ -56,7 +57,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPut]
         public IActionResult Edit(PoliticaPrestamoRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PoliticaPrestamoRespuesta oRespuesta = new PoliticaPrestamoRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -76,9 +77,9 @@ namespace WebServicesBiblioteca.Controllers
             return Ok(oRespuesta);
         }
         [HttpDelete("{Id}")]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(DateTime Id)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PoliticaPrestamoRespuesta oRespuesta = new PoliticaPrestamoRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())

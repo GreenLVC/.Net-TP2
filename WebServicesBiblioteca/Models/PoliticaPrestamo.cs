@@ -5,7 +5,7 @@ namespace WebServicesBiblioteca.Models
 {
     public partial class PoliticaPrestamo
     {
-        public int CantMaxLibrosPend { get; set; }
         public DateTime FechaVigencia { get; set; }
+        public int CantMaxLibrosPend { get; set; }
     }
 }

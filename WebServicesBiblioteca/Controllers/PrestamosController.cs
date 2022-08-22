@@ -33,7 +33,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPost]
         public IActionResult Add(PrestamoRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PrestamosRespuesta oRespuesta = new PrestamosRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -57,7 +57,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpPut]
         public IActionResult Edit(PrestamoRequest model)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PrestamosRespuesta oRespuesta = new PrestamosRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())
@@ -66,8 +66,6 @@ namespace WebServicesBiblioteca.Controllers
                     oPrestamo.FechaPrestamo = model.FechaPrestamo;
                     oPrestamo.IdSocio = model.IdSocio;
                     db.Prestamos.Add(oPrestamo);
-                    db.SaveChanges();
-                    oRespuesta.Exito = 1;
                     db.Entry(oPrestamo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                     oRespuesta.Exito = 1;
@@ -83,7 +81,7 @@ namespace WebServicesBiblioteca.Controllers
         [HttpDelete("{Id}")]
         public IActionResult Delete(int Id)
         {
-            SocioRespuesta oRespuesta = new SocioRespuesta();
+            PrestamosRespuesta oRespuesta = new PrestamosRespuesta();
             try
             {
                 using (bibliotecaContext db = new bibliotecaContext())

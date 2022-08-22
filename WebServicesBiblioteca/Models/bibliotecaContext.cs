@@ -65,7 +65,7 @@ namespace WebServicesBiblioteca.Models
                 entity.Property(e => e.CantDiasMaxPrestamo).HasColumnName("cant_dias_max_prestamo");
 
                 entity.Property(e => e.FechaEdicion)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("fecha_edicion");
 
                 entity.Property(e => e.Isbn)
@@ -76,7 +76,7 @@ namespace WebServicesBiblioteca.Models
                 entity.Property(e => e.NroEdicion).HasColumnName("nro_edicion");
 
                 entity.Property(e => e.Titulo)
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("titulo");
             });
@@ -94,7 +94,7 @@ namespace WebServicesBiblioteca.Models
                 entity.Property(e => e.Devuelto).HasColumnName("devuelto");
 
                 entity.Property(e => e.FechaDevolucion)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("fecha_devolucion");
 
                 entity.Property(e => e.IdEjemplar).HasColumnName("id_ejemplar");
@@ -116,15 +116,17 @@ namespace WebServicesBiblioteca.Models
 
             modelBuilder.Entity<PoliticaPrestamo>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FechaVigencia);
 
                 entity.ToTable("politica_prestamo");
 
-                entity.Property(e => e.CantMaxLibrosPend).HasColumnName("cant_max_libros_pend");
+                entity.HasIndex(e => e.FechaVigencia, "IX_politica_prestamo");
 
                 entity.Property(e => e.FechaVigencia)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("fecha_vigencia");
+
+                entity.Property(e => e.CantMaxLibrosPend).HasColumnName("cant_max_libros_pend");
             });
 
             modelBuilder.Entity<Prestamo>(entity =>
@@ -136,7 +138,7 @@ namespace WebServicesBiblioteca.Models
                 entity.Property(e => e.IdPrestamo).HasColumnName("id_prestamo");
 
                 entity.Property(e => e.FechaPrestamo)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("fecha_prestamo");
 
                 entity.Property(e => e.IdSocio).HasColumnName("id_socio");
